@@ -9,7 +9,7 @@ const MainHeader = (props) => {
     return (
         <MainHeaderStyle>
             <Logo/>
-            <Navigation isLoggedIn={props.isAuthenticated} onLogout={props.onLogout} />
+            <Navigation isLoggedIn={props.isAuthenticated} onLogout={props.onLogout} favorites={props.favorites} />
         </MainHeaderStyle>
     )
 }

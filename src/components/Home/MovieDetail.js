@@ -1,36 +1,29 @@
-import {Col, Row, Tag, Typography} from "antd";
+import {Col, Tag} from "antd";
 import React from "react";
+import {DescriptionStyle, ImdbRatingStyle, MovieDetailStyle, TagsStyle, TextTitleStyle} from "./MovieDetailStyle";
 
 const MovieDetail = ({Title, Poster, imdbRating, Rated, Runtime, Genre, Plot, Year}) => {
-    const TextTitle = Typography.Title;
     return (
-        <Row>
-            <Col span={11}>
-                <img
-                    src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
-                    alt={Title}
-                />
-            </Col>
-            <Col span={13}>
-                <Row>
-                    <Col span={21}>
-                        <TextTitle level={4}>{Title} {Year}</TextTitle></Col>
-                    <Col span={3} style={{textAlign:'right'}}>
-                        <TextTitle level={4}><span style={{color: '#41A8F8'}}>{imdbRating}</span></TextTitle>
-                    </Col>
-                </Row>
-                <Row style={{marginBottom: '20px'}}>
-                    <Col>
+        <MovieDetailStyle>
+            <img
+                src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
+                alt={Title}
+            />
+            <DescriptionStyle>
+                <TextTitleStyle>{Title} {Year}</TextTitleStyle>
+                <TagsStyle>
+                    <div>
                         <Tag>{Rated}</Tag>
                         <Tag>{Runtime}</Tag>
                         <Tag>{Genre}</Tag>
-                    </Col>
-                </Row>
-                <Row>
+                    </div>
+                    <ImdbRatingStyle>{imdbRating}</ImdbRatingStyle>
+                </TagsStyle>
+                <div>
                     <Col>{Plot}</Col>
-                </Row>
-            </Col>
-        </Row>
+                </div>
+            </DescriptionStyle>
+        </MovieDetailStyle>
     )
 }
 

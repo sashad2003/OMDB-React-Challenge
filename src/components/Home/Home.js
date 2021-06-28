@@ -35,12 +35,10 @@ function Home(props) {
                 .then(resp => resp.json())
                 .then(response => {
                     if (response.Response === 'False') {
-                        // setSearchPosition('center');
                         if (query !== '') {
                             setError(response.Error);
                         }
                     } else {
-                        // setSearchPosition('top');
                         setData(response.Search);
 
                     }
@@ -68,8 +66,8 @@ function Home(props) {
                         ActivateModal={setActivateModal}
                         key={index}
                         {...result}
-                        favorite={!!props.favorites.find(favorite => favorite === result.imdbID)}
                         onFavoriteClick={props.onFavoriteClick}
+                        favorite={!!props.favorites.find(favorite => favorite === result.imdbID)}
                     />
                 ))}
             </AllCards>

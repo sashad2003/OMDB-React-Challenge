@@ -11,7 +11,6 @@ function App() {
 
     useEffect(() => {
         const userLogged = localStorage.getItem('isLoggedIn');
-
         if (userLogged === "true") {
             setIsLoggedIn(true);
         }
@@ -27,19 +26,30 @@ function App() {
         setIsLoggedIn(false);
     }
 
-    const addToFavoritesHandler = (imdbID) => {
 
-        const newFavorites = [...favorites, imdbID];
-        setFavorites(newFavorites);
+    const addToFavoritesHandler = (imdbID) => {
+        function checkFav(favorite) {
+            return favorite !== imdbID;
+        }
+
+        const favId = favorites.find(favorite => favorite === imdbID);
+        if (favId !== imdbID) {
+            const newFavorites = [...favorites, imdbID];
+            setFavorites(newFavorites);
+        } else {
+            setFavorites(favorites.filter(checkFav));
+        }
+        localStorage.setItem('favoriteMovies', favorites.toString());
     }
 
 
     return (
         <>
-            <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler}/>
+            <MainHeader favorites={favorites} isAuthenticated={isLoggedIn} onLogout={logoutHandler}/>
             <main>
                 {!isLoggedIn && <Login onLogin={loginHandler}/>}
-                {isLoggedIn && <Home favorites={favorites} onFavoriteClick={addToFavoritesHandler} onLogout={logoutHandler}/>}
+                {isLoggedIn &&
+                <Home favorites={favorites} onFavoriteClick={addToFavoritesHandler} onLogout={logoutHandler}/>}
             </main>
         </>
     );

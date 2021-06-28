@@ -1,11 +1,12 @@
 import React from "react";
 import {AddFavoriteButtonSyle, BadgeStyle, CalCardBoxStyle, CoverImage, TitleStyle, YearStyle} from "./AllCardsStyle";
-import {HeartOutlined} from '@ant-design/icons'
+import {HeartFilled, HeartOutlined} from '@ant-design/icons'
 import noImg from '../images/no-image.png';
 
 const API_KEY = 'ce762116';
 
 const ColCardBox = ({Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal, Year, favorite, onFavoriteClick}) => {
+
     const clickHandler = () => {
 
         // Display Modal and Loading Icon
@@ -32,12 +33,12 @@ const ColCardBox = ({Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Act
                 <TitleStyle>{Title}</TitleStyle>
                 <YearStyle>({Year})</YearStyle>
                 <BadgeStyle>{Type}</BadgeStyle>
-                <div>{favorite.toString()}</div>
             </div>
 
             <AddFavoriteButtonSyle onClick={() => onFavoriteClick(imdbID)}>
                 <span>Add to Favorite </span>
-                <HeartOutlined/>
+                {!favorite && <HeartOutlined/>}
+                {favorite && <HeartFilled/>}
             </AddFavoriteButtonSyle>
 
         </CalCardBoxStyle>
