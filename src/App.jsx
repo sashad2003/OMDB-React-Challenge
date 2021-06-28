@@ -7,7 +7,7 @@ import Home from "./components/Home/Home";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState(sessionStorage.getItem('favoriteMovies') ? sessionStorage.getItem('favoriteMovies').split(',') : []);
 
     useEffect(() => {
         const userLogged = localStorage.getItem('isLoggedIn');
@@ -15,6 +15,13 @@ function App() {
             setIsLoggedIn(true);
         }
     }, []);
+
+    useEffect(() => {
+        if (favorites.length > 0) {
+            sessionStorage.setItem('favoriteMovies', favorites.toString());
+        }
+    }, [favorites]);
+
 
     const loginHandler = () => {
         localStorage.setItem('isLoggedIn', 'true');
@@ -28,18 +35,18 @@ function App() {
 
 
     const addToFavoritesHandler = (imdbID) => {
+        const isFavoriteExist = !!favorites.find(favorite => favorite === imdbID);
+
         function checkFav(favorite) {
             return favorite !== imdbID;
         }
 
-        const favId = favorites.find(favorite => favorite === imdbID);
-        if (favId !== imdbID) {
+        if (!isFavoriteExist) {
             const newFavorites = [...favorites, imdbID];
             setFavorites(newFavorites);
         } else {
             setFavorites(favorites.filter(checkFav));
         }
-        localStorage.setItem('favoriteMovies', favorites.toString());
     }
 
 

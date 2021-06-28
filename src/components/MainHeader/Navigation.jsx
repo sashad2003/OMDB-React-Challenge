@@ -8,7 +8,7 @@ const Navigation = (props) => {
         <>
             {props.isLoggedIn &&
             <NavigationStyled>
-                <Button><HeartOutlined /> {props.favorites.length}</Button>
+                <Button> <HeartOutlined /> {props.favorites.length} </Button>
                 <Button onClick={props.onLogout}>Logout</Button>
             </NavigationStyled>
             }

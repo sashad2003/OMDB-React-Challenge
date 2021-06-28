@@ -6,7 +6,6 @@ import noImg from '../images/no-image.png';
 const API_KEY = 'ce762116';
 
 const ColCardBox = ({Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal, Year, favorite, onFavoriteClick}) => {
-
     const clickHandler = () => {
 
         // Display Modal and Loading Icon
@@ -35,8 +34,9 @@ const ColCardBox = ({Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Act
                 <BadgeStyle>{Type}</BadgeStyle>
             </div>
 
-            <AddFavoriteButtonSyle onClick={() => onFavoriteClick(imdbID)}>
+            <AddFavoriteButtonSyle onClick={onFavoriteClick}>
                 <span>Add to Favorite </span>
+                {favorite}
                 {!favorite && <HeartOutlined/>}
                 {favorite && <HeartFilled/>}
             </AddFavoriteButtonSyle>

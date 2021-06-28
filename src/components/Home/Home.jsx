@@ -8,10 +8,9 @@ import 'antd/dist/antd.css';
 import {AllCards} from "./AllCardsStyle";
 import Error from "../UI/Error/Error";
 
-const API_KEY = 'df124266';
+const API_KEY = 'df124266'; // TODO : move this api key to .env file
 
 function Home(props) {
-
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -20,7 +19,6 @@ function Home(props) {
     const [detail, setShowDetail] = useState(false);
     const [detailRequest, setDetailRequest] = useState(false);
     const [searchPosition, setSearchPosition] = useState('center');
-
 
     useEffect(() => {
 
@@ -40,7 +38,6 @@ function Home(props) {
                         }
                     } else {
                         setData(response.Search);
-
                     }
                     setLoading(false);
                 })
@@ -59,17 +56,22 @@ function Home(props) {
             {loading && <Loader/>}
             {error !== null && <Error message={error} type="error"/>}
             <AllCards>
-                {data !== null && data.length > 0 && data.map((result, index) => (
+                {data !== null && data.length > 0 && data.map((result, index) => {
+                    // console.log(result);
+                    return (
                     <ColCardBox
                         ShowDetail={setShowDetail}
                         DetailRequest={setDetailRequest}
                         ActivateModal={setActivateModal}
                         key={index}
                         {...result}
-                        onFavoriteClick={props.onFavoriteClick}
-                        favorite={!!props.favorites.find(favorite => favorite === result.imdbID)}
+                        onFavoriteClick={() => props.onFavoriteClick(result.imdbID, result)}
+                        favorite={!!props.favorites?.find((favorite) => {
+                            return favorite === result.imdbID;
+                        })}
+
                     />
-                ))}
+                )})}
             </AllCards>
             <Modal
                 title='Detail'

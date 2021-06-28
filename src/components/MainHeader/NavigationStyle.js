@@ -7,5 +7,11 @@ const NavigationStyled = styled.div`
     Button{
       margin-left: 1rem;
     }
+    @media (max-width: 767px){
+        Button{
+          padding: 2px 1rem;
+          margin-left: 0.5rem;
+        }
+    }
 `
 export default NavigationStyled;
