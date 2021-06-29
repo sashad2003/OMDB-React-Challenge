@@ -105,6 +105,13 @@ export const AddFavoriteButtonSyle = styled(ButtonStyle)`
   &:hover{
     background-color: ${mainHoverColor};
   }
-  
+`
+
+export const FavoritesTitleStyle = styled.h1`
+  text-align: center;
+  margin: -2rem 0 -1rem 0;
+  @media(max-width: 767px){
+    margin: -3rem 0;
+  }
 `
 

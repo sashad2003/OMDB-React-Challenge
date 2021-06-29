@@ -1,7 +1,6 @@
 import {Spin} from "antd";
 import styled from 'styled-components';
 
-
 const Loader = styled(Spin)`
   margin: 20px 0;
   text-align: center;

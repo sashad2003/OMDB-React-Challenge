@@ -8,7 +8,6 @@ export const MovieDetailStyle = styled.div`
   @media (${mobile}){
     flex-direction: column;
   }
-  //flex-wrap: wrap;
 `
 
 export const DescriptionStyle = styled.div`

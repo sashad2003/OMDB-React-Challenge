@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../UI/Button/Button";
+import Button from "../../UI/Button/Button";
 import NavigationStyled from "./NavigationStyle";
 import {HeartOutlined} from '@ant-design/icons'
 
@@ -8,7 +8,7 @@ const Navigation = (props) => {
         <>
             {props.isLoggedIn &&
             <NavigationStyled>
-                <Button> <HeartOutlined /> {props.favorites.length} </Button>
+                <Button onClick={props.showFavoritesClicked}> <HeartOutlined/> {props.favorites.length} </Button>
                 <Button onClick={props.onLogout}>Logout</Button>
             </NavigationStyled>
             }

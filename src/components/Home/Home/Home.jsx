@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import SearchBox from "./SearchBox";
-import ColCardBox from "./ColCardBox";
-import MovieDetail from "./MovieDetail"
-import Loader from "./Loader";
+import SearchBox from "../SearchBox/SearchBox";
+import ColCardBox from "../ColCardBox/ColCardBox";
+import MovieDetail from "../MovieDetail/MovieDetail"
+import Loader from "../Loader/Loader";
 import {Modal} from 'antd';
 import 'antd/dist/antd.css';
-import {AllCards} from "./AllCardsStyle";
-import Error from "../UI/Error/Error";
+import {AllCards} from "../AllCardsStyle";
+import Error from "../../UI/Error/Error";
 
 const API_KEY = 'df124266'; // TODO : move this api key to .env file
 
@@ -47,7 +47,7 @@ function Home(props) {
                 })
         }, 800)
         return () => clearTimeout(timer);
-    }, [query]);
+    }, [query,]);
 
     return (
 
@@ -59,19 +59,21 @@ function Home(props) {
                 {data !== null && data.length > 0 && data.map((result, index) => {
                     // console.log(result);
                     return (
-                    <ColCardBox
-                        ShowDetail={setShowDetail}
-                        DetailRequest={setDetailRequest}
-                        ActivateModal={setActivateModal}
-                        key={index}
-                        {...result}
-                        onFavoriteClick={() => props.onFavoriteClick(result.imdbID, result)}
-                        favorite={!!props.favorites?.find((favorite) => {
-                            return favorite === result.imdbID;
-                        })}
+                        <ColCardBox
+                            ShowDetail={setShowDetail}
+                            DetailRequest={setDetailRequest}
+                            ActivateModal={setActivateModal}
+                            key={index}
+                            {...result}
+                            results={result}
+                            onFavoriteClick={() => props.onFavoriteClick(result)}
+                            favorite={!!props.favorites?.find((favorite) => {
+                                return favorite === result.imdbID;
+                            })}
 
-                    />
-                )})}
+                        />
+                    )
+                })}
             </AllCards>
             <Modal
                 title='Detail'

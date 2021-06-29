@@ -1,6 +1,6 @@
 import {Input} from "antd";
 import React from "react";
-import {SearchWrapperStyle} from "./AllCardsStyle";
+import {SearchWrapperStyle} from "../AllCardsStyle";
 
 const SearchBox = (props) => {
     const { Search } = Input;

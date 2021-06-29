@@ -1,7 +1,7 @@
 import React from "react";
-import {AddFavoriteButtonSyle, BadgeStyle, CalCardBoxStyle, CoverImage, TitleStyle, YearStyle} from "./AllCardsStyle";
+import {AddFavoriteButtonSyle, BadgeStyle, CalCardBoxStyle, CoverImage, TitleStyle, YearStyle} from "../AllCardsStyle";
 import {HeartFilled, HeartOutlined} from '@ant-design/icons'
-import noImg from '../images/no-image.png';
+import noImg from '../../images/no-image.png';
 
 const API_KEY = 'ce762116';
 
@@ -36,7 +36,6 @@ const ColCardBox = ({Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Act
 
             <AddFavoriteButtonSyle onClick={onFavoriteClick}>
                 <span>Add to Favorite </span>
-                {favorite}
                 {!favorite && <HeartOutlined/>}
                 {favorite && <HeartFilled/>}
             </AddFavoriteButtonSyle>
