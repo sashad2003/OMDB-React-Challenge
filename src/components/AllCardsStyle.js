@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components';
-import ButtonStyle from "../UI/Button/ButtonStyle";
+import ButtonStyle from "./UI/Button/ButtonStyle";
 
 const mainColor = '#1890ff';
 const mainHoverColor = 'rgba(24,143,253,0.2)';

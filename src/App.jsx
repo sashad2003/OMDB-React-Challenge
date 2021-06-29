@@ -2,8 +2,17 @@ import React, {useEffect, useState} from "react";
 import './index.css'
 import MainHeader from "./components/MainHeader/MainHeader/MainHeader";
 import Login from "./components/Login/Login";
-import Home from "./components/Home/Home/Home";
-import FavoritesPage from "./components/Home/FavoritesPage/FavoritesPage";
+import Home from "./components/Home/Home";
+import FavoritesPage from "./components/FavoritesPage/FavoritesPage";
+
+function getSessionStorageOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    console.log(defaultValue, 'key')
+    if (!stored) {
+        return defaultValue;
+    }
+    return JSON.parse(stored);
+}
 
 
 function App() {
@@ -11,30 +20,25 @@ function App() {
     const [isFavorites, setIsFavorites] = useState(false);
 
     const [favorites, setFavorites] = useState(sessionStorage.getItem('favoriteID') ? sessionStorage.getItem('favoriteID').split(',') : []);
-    const [favoritesLocal, setFavoritesLocal] = useState(sessionStorage.getItem('favoriteObjects') ? sessionStorage.getItem('favoriteObjects').split(',') : []);
+    const [favoritesLocal, setFavoritesLocal] = useState(getSessionStorageOrDefault('favoriteObjects',''));
 
-    const [sessionCout, setSessionCount] = useState(0);
 
     useEffect(() => {
         const userLogged = localStorage.getItem('isLoggedIn');
-        // const raw = sessionStorage.getItem('favoriteObjects') || [];
-        // setFavoritesLocal(JSON.parse(raw));
         if (userLogged === "true") {
             setIsLoggedIn(true);
         }
     }, []);
 
     useEffect(() => {
-        if (sessionCout !== 0) {
-            if (favorites.length > 0) {
+        if (favorites.length > 0) {
                 sessionStorage.setItem('favoriteID', favorites.toString());
                 sessionStorage.setItem('favoriteObjects', JSON.stringify(favoritesLocal));
             } else {
                 sessionStorage.setItem('favoriteID', '');
                 sessionStorage.setItem('favoriteObjects', '');
             }
-        }
-    }, [favorites, favoritesLocal, sessionCout]);
+    }, [favorites, favoritesLocal]);
 
 
     const loginHandler = () => {
@@ -49,8 +53,7 @@ function App() {
 
 
     const addToFavoritesHandler = (results) => {
-        setSessionCount(1);
-        console.log("my results ", results)
+
         const isFavoriteExist = !!favorites.find(favorite => favorite === results.imdbID);
 
         function checkFav(favorite) {
@@ -90,7 +93,7 @@ function App() {
                 {isLoggedIn && !isFavorites &&
                 <Home favorites={favorites} onFavoriteClick={addToFavoritesHandler}/>}
 
-                {isFavorites &&
+                {isLoggedIn && isFavorites &&
                 <FavoritesPage favoritesLocal={favoritesLocal} onFavoriteClick={addToFavoritesHandler}/>}
             </main>
         </>

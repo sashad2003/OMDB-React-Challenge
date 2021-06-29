@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 import {Modal} from 'antd';
 import 'antd/dist/antd.css';
 import {AllCards} from "../AllCardsStyle";
-import Error from "../../UI/Error/Error";
+import Error from "../UI/Error/Error";
 
 const API_KEY = 'df124266'; // TODO : move this api key to .env file
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {AddFavoriteButtonSyle, BadgeStyle, CalCardBoxStyle, CoverImage, TitleStyle, YearStyle} from "../AllCardsStyle";
 import {HeartFilled, HeartOutlined} from '@ant-design/icons'
-import noImg from '../../images/no-image.png';
+import noImg from '../images/no-image.png';
 
 const API_KEY = 'ce762116';
 
